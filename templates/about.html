@@ -4,14 +4,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>About</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
   </head>
   <body>
-    <nav>
+    <nav class="nav">
       <a href="{{ url_for('home') }}">Home</a>
     </nav>
-    <main>
-      <h1>About</h1>
-      <p>This is my personal link page.</p>
+    <main class="main">
+      <section class="about-card">
+        <h1>About</h1>
+        <p class="about-copy">This is my personal link page—a simple place to share the sites and projects I care about.</p>
+      </section>
     </main>
   </body>
 </html>

@@ -4,27 +4,64 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Links</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
   </head>
   <body>
-    <nav>
+    <nav class="nav">
       <a href="{{ url_for('about') }}">About</a>
     </nav>
-    <main>
-      <h1>My Links</h1>
-      <form action="{{ url_for('add_link') }}" method="post">
-        <label for="name">Site name</label>
-        <input id="name" name="name" type="text" required />
+    <main class="main">
+      <header class="page-header">
+        <div class="avatar">M</div>
+        <h1>My Links</h1>
+        <p class="subtitle">Everything you need, all in one place.</p>
+      </header>
 
-        <label for="url">URL</label>
-        <input id="url" name="url" type="url" required />
+      <form class="form-card" action="{{ url_for('add_link') }}" method="post">
+        <h2>Add a link</h2>
+        <div class="form-fields">
+          <div>
+            <label for="name">Site name</label>
+            <input id="name" name="name" type="text" placeholder="My portfolio" required />
+          </div>
+          <div>
+            <label for="url">URL</label>
+            <input id="url" name="url" type="url" placeholder="https://example.com" required />
+          </div>
+        </div>
 
         <button type="submit">Add Link</button>
       </form>
 
-      <ul>
+      <ul class="links-list">
         {% for link in links %}
           <li>
-            <a href="{{ link.url }}" target="_blank" rel="noopener noreferrer">{{ link.name }}</a>
+            <div class="link-card">
+              <a class="link-title" href="{{ link.url }}" target="_blank" rel="noopener noreferrer">
+              <span>{{ link.name }}</span>
+                <span class="external-icon">↗</span>
+              </a>
+              <form action="{{ url_for('delete_link') }}" method="post">
+                <input type="hidden" name="url" value="{{ link.url }}" />
+                <button class="delete-button" type="submit" aria-label="Delete {{ link.name }}" title="Delete {{ link.name }}">
+                  <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 6h18" />
+                    <path d="M8 6V4h8v2" />
+                    <path d="M19 6l-1 14H6L5 6" />
+                    <path d="M10 11v5M14 11v5" />
+                  </svg>
+                </button>
+              </form>
+              <details class="edit-details">
+                <summary aria-label="Edit {{ link.name }}" title="Edit {{ link.name }}">✎</summary>
+                <form class="edit-form" action="{{ url_for('edit_link') }}" method="post">
+                  <input type="hidden" name="original_url" value="{{ link.url }}" />
+                  <input name="name" type="text" value="{{ link.name }}" aria-label="Site name" required />
+                  <input name="url" type="url" value="{{ link.url }}" aria-label="URL" required />
+                  <button class="save-button" type="submit">Save</button>
+                </form>
+              </details>
+            </div>
           </li>
         {% endfor %}
       </ul>
