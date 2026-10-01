@@ -11,10 +11,22 @@
     </nav>
     <main>
       <h1>My Links</h1>
+      <form action="{{ url_for('add_link') }}" method="post">
+        <label for="name">Site name</label>
+        <input id="name" name="name" type="text" required />
+
+        <label for="url">URL</label>
+        <input id="url" name="url" type="url" required />
+
+        <button type="submit">Add Link</button>
+      </form>
+
       <ul>
-        <li><a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
-        <li><a href="https://github.com/" target="_blank" rel="noopener noreferrer">GitHub</a></li>
-        <li><a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+        {% for link in links %}
+          <li>
+            <a href="{{ link.url }}" target="_blank" rel="noopener noreferrer">{{ link.name }}</a>
+          </li>
+        {% endfor %}
       </ul>
     </main>
   </body>
