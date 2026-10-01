@@ -38,7 +38,16 @@
           <li>
             <div class="link-card">
               <a class="link-title" href="{{ link.url }}" target="_blank" rel="noopener noreferrer">
-              <span>{{ link.name }}</span>
+                {% if link.image_url != 'Not Available' %}
+                  <img class="link-image" src="{{ link.image_url }}" alt="" />
+                {% else %}
+                  <img class="link-image" src="{{ url_for('static', filename='default-link.svg') }}" alt="" />
+                {% endif %}
+                <span class="link-copy">
+                  <small class="site-name">{{ link.name }}</small>
+                  <strong>{{ link.title }}</strong>
+                  <span class="description">{{ link.description }}</span>
+                </span>
                 <span class="external-icon">↗</span>
               </a>
               <form action="{{ url_for('delete_link') }}" method="post">

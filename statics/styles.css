@@ -149,10 +149,10 @@ button:hover {
 
 .link-card {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
-  border-radius: 0.75rem;
-  padding: 1rem 1.25rem;
+  border-radius: 1rem;
+  padding: 1.25rem;
   color: #f1f5f9;
   font-weight: 600;
   text-decoration: none;
@@ -163,9 +163,51 @@ button:hover {
   display: flex;
   flex: 1;
   align-items: center;
-  justify-content: space-between;
   color: #f1f5f9;
   text-decoration: none;
+}
+
+.link-image {
+  width: 4.5rem;
+  height: 4.5rem;
+  flex: 0 0 4.5rem;
+  margin-right: 1rem;
+  border-radius: 0.75rem;
+  background: #ffffff;
+  object-fit: contain;
+  padding: 0.25rem;
+}
+
+.fallback-image {
+  display: grid;
+  place-items: center;
+  color: #94a3b8;
+  font-weight: 700;
+}
+
+.link-copy {
+  display: grid;
+  flex: 1;
+  gap: 0.25rem;
+}
+
+.link-copy strong {
+  font-size: 1.05rem;
+}
+
+.link-copy .site-name {
+  color: #22d3ee;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.link-copy .description {
+  color: #94a3b8;
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.4;
 }
 
 .link-card:hover {
