@@ -7,3 +7,4 @@ script = "pip install Flask"
 
 [setup.darwin]
 script = "pip install flask"
+script = "pip install requests"
