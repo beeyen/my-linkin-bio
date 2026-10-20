@@ -71,6 +71,11 @@ def about():
     return render_template("about.html")
 
 
+@app.route("/contact")
+def contact():
+    return render_template("contact.html")
+
+
 @app.errorhandler(404)
 def page_not_found(error):
     """Render the custom page for routes that do not exist."""

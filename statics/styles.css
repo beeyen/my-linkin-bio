@@ -18,8 +18,16 @@ body {
 
 .nav {
   display: flex;
+  gap: 1rem;
   justify-content: flex-end;
-  padding-block: 1.5rem;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  border: 1px solid #1e293b;
+  border-radius: 1rem;
+  padding: 0.5rem;
+  background: rgb(15 23 42 / 85%);
+  box-shadow: 0 10px 25px rgb(0 0 0 / 20%);
+  backdrop-filter: blur(12px);
 }
 
 .nav a {
@@ -31,6 +39,27 @@ body {
 
 .nav a:hover {
   color: #fff;
+}
+
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border-radius: 0.65rem;
+  padding: 0.65rem 0.85rem;
+  transition: background 150ms ease, color 150ms ease, transform 150ms ease;
+}
+
+.nav-icon {
+  color: #22d3ee;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.nav-link:hover {
+  background: #1e293b;
+  color: #f8fafc;
+  transform: translateY(-1px);
 }
 
 .main {
@@ -300,6 +329,11 @@ button:hover {
 .about-copy {
   margin: 0;
   line-height: 1.75;
+}
+
+.about-copy a {
+  color: #22d3ee;
+  font-weight: 700;
 }
 
 .error-page {

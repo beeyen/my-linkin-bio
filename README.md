@@ -11,6 +11,7 @@
 - Edit or delete existing links from the home page.
 - Fetch Open Graph titles, descriptions, and images for link cards.
 - View project information at `/about`.
+- View contact information and an email address at `/contact`.
 - Render custom styled pages for 404 and 500 errors.
 
 ### Routes
@@ -20,6 +21,7 @@
 - `POST /edit` — Update a link.
 - `POST /delete` — Delete a link.
 - `GET /about` — Display information about the project.
+- `GET /contact` — Display a short contact message and email address.
 
 ## Setup
 
