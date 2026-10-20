@@ -1,0 +1,24 @@
+{
+  "name": "Flask project toolkit",
+  "version": "1.0",
+  "description": "A Codex plugin for Flask projects that keeps README documentation current and provides live Flask documentation through Context7 MCP.",
+  "author": {
+    "name": "Priscilla Nguyen"
+  },
+  "skills": [
+    "/Users/priscillanguyen/.codex/skills/update-readme/SKILL.md"
+  ],
+  "mcpServers": {
+    "context7": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@upstash/context7-mcp"
+      ]
+    }
+  },
+  "interface": {
+    "displayName": "Flask Project Toolkit",
+    "shortDescription": "Auto-documenting README and live Flask docs in one install"
+  }
+}
