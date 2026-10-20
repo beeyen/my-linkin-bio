@@ -1,6 +1,11 @@
+import logging
+
 import requests
 from bs4 import BeautifulSoup
 from flask import Flask, redirect, render_template, request, url_for
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 app = Flask(__name__, static_folder="statics")
 links = []
@@ -23,7 +28,8 @@ def fetch_link_metadata(url):
         response = requests.get(url, headers={"User-Agent": "Mozilla/5.0"}, timeout=5)
         response.raise_for_status()
         soup = BeautifulSoup(response.text, "html.parser")
-    except requests.RequestException:
+    except requests.RequestException as error:
+        logger.warning("Failed to fetch metadata for URL %s: %s", url, error)
         return metadata
 
     for field, property_name in (("title", "og:title"), ("description", "og:description"), ("image_url", "og:image")):
@@ -36,11 +42,16 @@ def fetch_link_metadata(url):
 @app.post("/add")
 def add_link():
     link_url = request.form["url"]
+    metadata = fetch_link_metadata(link_url)
+    if all(value == "Not Available" for value in metadata.values()):
+        logger.warning("Metadata could not be retrieved for URL %s", link_url)
+
     links.append({
         "name": request.form["name"],
         "url": link_url,
-        **fetch_link_metadata(link_url),
+        **metadata,
     })
+    logger.info("Successfully added link %s (%s)", request.form["name"], link_url)
     return redirect(url_for("home"))
 
 
