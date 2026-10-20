@@ -117,6 +117,21 @@ h1 {
   margin-bottom: 2.5rem;
 }
 
+.flash-messages {
+  margin: -1rem 0 2rem;
+}
+
+.flash-message {
+  margin: 0;
+  border: 1px solid #f59e0b;
+  border-radius: 0.75rem;
+  padding: 0.75rem 1rem;
+  background: rgb(120 53 15 / 30%);
+  color: #fcd34d;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
 h2 {
   margin: 0 0 1rem;
   font-size: 1.125rem;
@@ -196,6 +211,11 @@ button:hover {
   text-decoration: none;
 }
 
+.link-title--disabled {
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
 .link-image {
   width: 4.5rem;
   height: 4.5rem;
@@ -239,10 +259,27 @@ button:hover {
   line-height: 1.4;
 }
 
+.metadata-warning {
+  color: #fbbf24;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
 .link-card:hover {
   border-color: rgb(34 211 238 / 60%);
   background: #1e293b;
   transform: translateY(-2px);
+}
+
+.link-card--metadata-missing {
+  border-color: #92400e;
+  background: #1c1917;
+}
+
+.link-card--metadata-missing:hover {
+  border-color: #f59e0b;
 }
 
 .external-icon {

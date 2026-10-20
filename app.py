@@ -2,12 +2,13 @@ import logging
 
 import requests
 from bs4 import BeautifulSoup
-from flask import Flask, redirect, render_template, request, url_for
+from flask import Flask, flash, redirect, render_template, request, url_for
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 app = Flask(__name__, static_folder="statics")
+app.config["SECRET_KEY"] = "dev-secret-key"
 links = []
 
 
@@ -41,17 +42,27 @@ def fetch_link_metadata(url):
 
 @app.post("/add")
 def add_link():
+    site_name = request.form["name"].strip()
     link_url = request.form["url"]
+    duplicate_name = any(link["name"].casefold() == site_name.casefold() for link in links)
+    if duplicate_name:
+        logger.warning("A link with the site name %s already exists", site_name)
+        flash(f"A link named {site_name} already exists and was not added.", "warning")
+        return redirect(url_for("home"))
+
     metadata = fetch_link_metadata(link_url)
-    if all(value == "Not Available" for value in metadata.values()):
+    metadata_unavailable = all(value == "Not Available" for value in metadata.values())
+    if metadata_unavailable:
         logger.warning("Metadata could not be retrieved for URL %s", link_url)
+        flash("We could not retrieve metadata for this URL. The link was added with fallback content.", "warning")
 
     links.append({
-        "name": request.form["name"],
+        "name": site_name,
         "url": link_url,
+        "metadata_unavailable": metadata_unavailable,
         **metadata,
     })
-    logger.info("Successfully added link %s (%s)", request.form["name"], link_url)
+    logger.info("Successfully added link %s (%s)", site_name, link_url)
     return redirect(url_for("home"))
 
 
@@ -72,7 +83,9 @@ def edit_link():
         if link["url"] == original_url:
             link["name"] = request.form["name"]
             link["url"] = request.form["url"]
-            link.update(fetch_link_metadata(link["url"]))
+            metadata = fetch_link_metadata(link["url"])
+            link["metadata_unavailable"] = all(value == "Not Available" for value in metadata.values())
+            link.update(metadata)
             break
     return redirect(url_for("home"))
 

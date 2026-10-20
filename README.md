@@ -8,8 +8,10 @@
 
 - View links sorted alphabetically by name at `/`.
 - Add links with a name and URL using the home page form.
+- Block duplicate site names and show a warning when a duplicate link is submitted.
 - Edit or delete existing links from the home page.
 - Fetch Open Graph titles, descriptions, and images for link cards.
+- Show a warning and visual indicator when link metadata cannot be retrieved.
 - View project information at `/about`.
 - View contact information and an email address at `/contact`.
 - Render custom styled pages for 404 and 500 errors.

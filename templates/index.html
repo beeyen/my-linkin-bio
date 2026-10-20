@@ -34,11 +34,25 @@
         <button type="submit">Add Link</button>
       </form>
 
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          <div class="flash-messages" role="status">
+            {% for category, message in messages %}
+              <p class="flash-message flash-message--{{ category }}">{{ message }}</p>
+            {% endfor %}
+          </div>
+        {% endif %}
+      {% endwith %}
+
       <ul class="links-list">
         {% for link in links %}
           <li>
-            <div class="link-card">
-              <a class="link-title" href="{{ link.url }}" target="_blank" rel="noopener noreferrer">
+            <div class="link-card{% if link.metadata_unavailable %} link-card--metadata-missing{% endif %}">
+              {% if link.metadata_unavailable %}
+                <div class="link-title link-title--disabled" aria-label="{{ link.name }} metadata unavailable">
+              {% else %}
+                <a class="link-title" href="{{ link.url }}" target="_blank" rel="noopener noreferrer">
+              {% endif %}
                 {% if link.image_url != 'Not Available' %}
                   <img class="link-image" src="{{ link.image_url }}" alt="" />
                 {% else %}
@@ -48,9 +62,16 @@
                   <small class="site-name">{{ link.name }}</small>
                   <strong>{{ link.title }}</strong>
                   <span class="description">{{ link.description }}</span>
+                  {% if link.metadata_unavailable %}
+                    <small class="metadata-warning">Metadata unavailable</small>
+                  {% endif %}
                 </span>
                 <span class="external-icon">↗</span>
-              </a>
+              {% if link.metadata_unavailable %}
+                </div>
+              {% else %}
+                </a>
+              {% endif %}
               <form action="{{ url_for('delete_link') }}" method="post">
                 <input type="hidden" name="url" value="{{ link.url }}" />
                 <button class="delete-button" type="submit" aria-label="Delete {{ link.name }}" title="Delete {{ link.name }}">
