@@ -115,6 +115,17 @@ h1 {
 
 .form-card {
   margin-bottom: 2.5rem;
+  transition: opacity 150ms ease;
+}
+
+.main:has(.edit-details[open]) .form-card {
+  pointer-events: none;
+  opacity: 0.45;
+}
+
+.main:has(.edit-details[open]) .link-title {
+  pointer-events: none;
+  cursor: default;
 }
 
 .flash-messages {
@@ -201,6 +212,11 @@ button:hover {
   font-weight: 600;
   text-decoration: none;
   transition: transform 150ms ease, background 150ms ease, border-color 150ms ease;
+}
+
+.link-card:has(.edit-details[open]) {
+  position: relative;
+  z-index: 10;
 }
 
 .link-title {
@@ -296,7 +312,12 @@ button:hover {
 
 .edit-details {
   position: relative;
+  z-index: 2;
   margin-left: 0.25rem;
+}
+
+.edit-details[open] {
+  z-index: 10;
 }
 
 .edit-details summary {
@@ -317,26 +338,45 @@ button:hover {
 .edit-form {
   position: absolute;
   right: 0;
-  z-index: 1;
+  z-index: 10;
   display: grid;
   gap: 0.5rem;
   width: min(20rem, 70vw);
   margin: 0.5rem 0 0;
   padding: 0.75rem;
-  border: 1px solid #334155;
+  border: 1px solid #0891b2;
+  border-top-color: #67e8f9;
   border-radius: 0.5rem;
-  background: #0f172a;
-  box-shadow: 0 10px 25px rgb(0 0 0 / 30%);
+  background: linear-gradient(145deg, #334155, #1e293b 65%, #111827);
+  box-shadow: 0 10px 20px rgb(0 0 0 / 25%);
 }
 
 .edit-form input {
+  border-color: #67e8f9;
+  background: #ecfeff;
+  color: #164e63;
   padding: 0.5rem 0.75rem;
+}
+
+.edit-form input:focus {
+  border-color: #06b6d4;
+  outline-color: rgb(6 182 212 / 25%);
+}
+
+.edit-form input::placeholder {
+  color: #0e7490;
 }
 
 .edit-form .save-button {
   width: 100%;
   margin: 0;
   padding: 0.5rem;
+  background: #06b6d4;
+  color: #082f49;
+}
+
+.edit-form .save-button:hover {
+  background: #22d3ee;
 }
 
 .link-card .delete-button {

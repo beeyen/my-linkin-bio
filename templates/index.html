@@ -97,5 +97,14 @@
         {% endfor %}
       </ul>
     </main>
+    <script>
+      document.addEventListener("click", (event) => {
+        document.querySelectorAll(".edit-details[open]").forEach((details) => {
+          if (!details.contains(event.target)) {
+            details.removeAttribute("open");
+          }
+        });
+      });
+    </script>
   </body>
 </html>
