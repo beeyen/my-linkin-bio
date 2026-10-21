@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-    <title>Server Error</title>
+    <title>{{ config["LABELS"]["server_error_title"] }}</title>
 </head>
 <body class="error-page">
     <main class="error-card">
-        <p class="error-code">Error 500</p>
-        <h1>Something went wrong</h1>
-        <p class="error-copy">We could not complete your request. Please try again later.</p>
-        <a class="home-link" href="{{ url_for('home') }}">Return home</a>
+        <p class="error-code">{{ config["LABELS"]["error_500_code"] }}</p>
+        <h1>{{ config["LABELS"]["error_500_heading"] }}</h1>
+        <p class="error-copy">{{ config["LABELS"]["error_500_message"] }}</p>
+        <a class="home-link" href="{{ url_for('home') }}">{{ config["LABELS"]["return_home"] }}</a>
     </main>
 </body>
 </html>

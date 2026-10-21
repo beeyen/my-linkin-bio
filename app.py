@@ -1,5 +1,7 @@
 from datetime import datetime
+import json
 import logging
+from pathlib import Path
 
 import requests
 from bs4 import BeautifulSoup
@@ -9,8 +11,17 @@ from utils import is_duplicate_site_name, is_valid_url
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+configuration_path = Path(__file__).with_name("constants.json")
+with configuration_path.open(encoding="utf-8") as configuration_file:
+    configuration = json.load(configuration_file)
+
+LABELS = configuration["LABELS"]
+PAGE_NAMES = configuration["PAGE_NAMES"]
+
 app = Flask(__name__, static_folder="statics")
 app.config["SECRET_KEY"] = "dev-secret-key"
+app.config["LABELS"] = LABELS
+app.config["PAGE_NAMES"] = PAGE_NAMES
 links = []
 
 
@@ -24,7 +35,7 @@ def home():
 def health_check():
     """Return the application health status and current server time."""
     return jsonify({
-        "status": "OK",
+        "status": LABELS["health_ok"],
         "server_time": datetime.now().astimezone().isoformat(),
     }), 200
 
@@ -32,9 +43,9 @@ def health_check():
 def fetch_link_metadata(url):
     """Fetch Open Graph metadata and use fallbacks when it is unavailable."""
     metadata = {
-        "title": "Not Available",
-        "description": "Not Available",
-        "image_url": "Not Available",
+        "title": LABELS["not_available"],
+        "description": LABELS["not_available"],
+        "image_url": LABELS["not_available"],
     }
     try:
         response = requests.get(url, headers={"User-Agent": "Mozilla/5.0"}, timeout=5)
@@ -47,7 +58,7 @@ def fetch_link_metadata(url):
     for field, property_name in (("title", "og:title"), ("description", "og:description"), ("image_url", "og:image")):
         tag = soup.find("meta", property=property_name)
         content = tag.get("content", "").strip() if tag else ""
-        metadata[field] = content or "Not Available"
+        metadata[field] = content or LABELS["not_available"]
     return metadata
 
 
@@ -57,19 +68,19 @@ def add_link():
     link_url = request.form["url"].strip()
     if not is_valid_url(link_url):
         logger.warning("Rejected invalid URL submitted for site %s: %s", site_name, link_url)
-        flash("Please enter a valid URL beginning with http:// or https://.", "warning")
+        flash(LABELS["invalid_url_warning"], "warning")
         return redirect(url_for("home"))
 
     if is_duplicate_site_name(site_name, links):
         logger.warning("A link with the site name %s already exists", site_name)
-        flash(f"A link named {site_name} already exists and was not added.", "warning")
+        flash(LABELS["duplicate_name_warning"].format(site_name=site_name), "warning")
         return redirect(url_for("home"))
 
     metadata = fetch_link_metadata(link_url)
-    metadata_unavailable = all(value == "Not Available" for value in metadata.values())
+    metadata_unavailable = all(value == LABELS["not_available"] for value in metadata.values())
     if metadata_unavailable:
         logger.warning("Metadata could not be retrieved for URL %s", link_url)
-        flash("We could not retrieve metadata for this URL. The link was added with fallback content.", "warning")
+        flash(LABELS["metadata_warning"], "warning")
 
     links.append({
         "name": site_name,
@@ -99,7 +110,7 @@ def edit_link():
             link["name"] = request.form["name"]
             link["url"] = request.form["url"]
             metadata = fetch_link_metadata(link["url"])
-            link["metadata_unavailable"] = all(value == "Not Available" for value in metadata.values())
+            link["metadata_unavailable"] = all(value == LABELS["not_available"] for value in metadata.values())
             link.update(metadata)
             break
     return redirect(url_for("home"))

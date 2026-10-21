@@ -3,19 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Contact</title>
+    <title>{{ config["LABELS"]["contact_title"] }}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
   </head>
   <body>
     <nav class="nav">
-      <a class="nav-link" href="{{ url_for('home') }}"><span class="nav-icon" aria-hidden="true">⌂</span>Home</a>
-      <a class="nav-link" href="{{ url_for('about') }}"><span class="nav-icon" aria-hidden="true">ⓘ</span>About</a>
+      <a class="nav-link" href="{{ url_for('home') }}"><span class="nav-icon" aria-hidden="true">⌂</span>{{ config["LABELS"]["home_title"] }}</a>
+      <a class="nav-link" href="{{ url_for('about') }}"><span class="nav-icon" aria-hidden="true">ⓘ</span>{{ config["LABELS"]["about_title"] }}</a>
     </nav>
     <main class="main">
       <section class="about-card">
-        <h1>Contact</h1>
-        <p class="about-copy">Have a question or want to connect? I would love to hear from you.</p>
-        <p class="about-copy"><a href="mailto:hello@example.com">hello@example.com</a></p>
+        <h1>{{ config["LABELS"]["contact_title"] }}</h1>
+        <p class="about-copy">{{ config["LABELS"]["contact_message"] }}</p>
+        <p class="about-copy"><a href="mailto:{{ config['LABELS']['contact_email'] }}">{{ config["LABELS"]["contact_email"] }}</a></p>
       </section>
     </main>
   </body>

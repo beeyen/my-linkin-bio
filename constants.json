@@ -1,0 +1,42 @@
+{
+  "PAGE_NAMES": {
+    "home": "My Links",
+    "about": "About",
+    "contact": "Contact",
+    "not_found": "Page Not Found",
+    "server_error": "Server Error"
+  },
+  "LABELS": {
+    "home_title": "My Links",
+    "about_title": "About",
+    "contact_title": "Contact",
+    "not_found_title": "Page Not Found",
+    "server_error_title": "Server Error",
+    "home_subtitle": "Everything you need, all in one place.",
+    "about_message": "This is my personal link page—a simple place to share the sites and projects I care about.",
+    "contact_message": "Have a question or want to connect? I would love to hear from you.",
+    "contact_email": "hello@example.com",
+    "error_404_code": "Error 404",
+    "error_404_message": "Sorry, the page you requested does not exist.",
+    "error_500_code": "Error 500",
+    "error_500_heading": "Something went wrong",
+    "error_500_message": "We could not complete your request. Please try again later.",
+    "return_home": "Return home",
+    "add_link_heading": "Add a link",
+    "site_name_label": "Site name",
+    "site_name_placeholder": "My portfolio",
+    "url_label": "URL",
+    "url_placeholder": "https://example.com",
+    "add_link_button": "Add Link",
+    "save_button": "Save",
+    "metadata_unavailable": "Metadata unavailable",
+    "metadata_unavailable_aria": "metadata unavailable",
+    "delete_action": "Delete",
+    "edit_action": "Edit",
+    "not_available": "Not Available",
+    "health_ok": "OK",
+    "duplicate_name_warning": "A link named {site_name} already exists and was not added.",
+    "invalid_url_warning": "Please enter a valid URL beginning with http:// or https://.",
+    "metadata_warning": "We could not retrieve metadata for this URL. The link was added with fallback content."
+  }
+}

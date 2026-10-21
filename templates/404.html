@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-    <title>404 Page Not Found</title>
+    <title>404 {{ config["LABELS"]["not_found_title"] }}</title>
 </head>
 <body class="error-page">
     <main class="error-card">
-        <p class="error-code">Error 404</p>
-        <h1>Page not found</h1>
-        <p class="error-copy">Sorry, the page you requested does not exist.</p>
-        <a class="home-link" href="{{ url_for('home') }}">Return home</a>
+        <p class="error-code">{{ config["LABELS"]["error_404_code"] }}</p>
+        <h1>{{ config["LABELS"]["not_found_title"] }}</h1>
+        <p class="error-copy">{{ config["LABELS"]["error_404_message"] }}</p>
+        <a class="home-link" href="{{ url_for('home') }}">{{ config["LABELS"]["return_home"] }}</a>
     </main>
 </body>
 </html>
