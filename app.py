@@ -1,8 +1,9 @@
+from datetime import datetime
 import logging
 
 import requests
 from bs4 import BeautifulSoup
-from flask import Flask, flash, redirect, render_template, request, url_for
+from flask import Flask, flash, jsonify, redirect, render_template, request, url_for
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -16,6 +17,15 @@ links = []
 def home():
     sorted_links = sorted(links, key=lambda link: link["name"].lower())
     return render_template("index.html", links=sorted_links)
+
+
+@app.get("/health")
+def health_check():
+    """Return the application health status and current server time."""
+    return jsonify({
+        "status": "OK",
+        "server_time": datetime.now().astimezone().isoformat(),
+    }), 200
 
 
 def fetch_link_metadata(url):

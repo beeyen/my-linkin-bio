@@ -7,6 +7,7 @@
 ## Features
 
 - View links sorted alphabetically by name at `/`.
+- Check application health and server time at `/health`.
 - Add links with a name and URL using the home page form.
 - Block duplicate site names and show a warning when a duplicate link is submitted.
 - Edit or delete existing links from the home page.
@@ -19,6 +20,7 @@
 ### Routes
 
 - `GET /` — Display the link collection and link management form.
+- `GET /health` — Return a JSON health status and current server time.
 - `POST /add` — Add a link.
 - `POST /edit` — Update a link.
 - `POST /delete` — Delete a link.
