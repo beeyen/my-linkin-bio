@@ -9,6 +9,7 @@
 - View links sorted alphabetically by name at `/`.
 - Check application health and server time at `/health`.
 - Add links with a name and URL using the home page form.
+- Validate submitted URLs and show a warning when a URL is invalid.
 - Block duplicate site names and show a warning when a duplicate link is submitted.
 - Edit or delete existing links from the home page.
 - Fetch Open Graph titles, descriptions, and images for link cards.

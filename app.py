@@ -4,6 +4,7 @@ import logging
 import requests
 from bs4 import BeautifulSoup
 from flask import Flask, flash, jsonify, redirect, render_template, request, url_for
+from utils import is_duplicate_site_name, is_valid_url
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -53,9 +54,13 @@ def fetch_link_metadata(url):
 @app.post("/add")
 def add_link():
     site_name = request.form["name"].strip()
-    link_url = request.form["url"]
-    duplicate_name = any(link["name"].casefold() == site_name.casefold() for link in links)
-    if duplicate_name:
+    link_url = request.form["url"].strip()
+    if not is_valid_url(link_url):
+        logger.warning("Rejected invalid URL submitted for site %s: %s", site_name, link_url)
+        flash("Please enter a valid URL beginning with http:// or https://.", "warning")
+        return redirect(url_for("home"))
+
+    if is_duplicate_site_name(site_name, links):
         logger.warning("A link with the site name %s already exists", site_name)
         flash(f"A link named {site_name} already exists and was not added.", "warning")
         return redirect(url_for("home"))
