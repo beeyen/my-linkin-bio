@@ -8,8 +8,12 @@
   </head>
   <body>
     <nav class="nav">
-      <a class="nav-link" href="{{ url_for('about') }}"><span class="nav-icon" aria-hidden="true">ⓘ</span>{{ config["LABELS"]["about_title"] }}</a>
-      <a class="nav-link" href="{{ url_for('contact') }}"><span class="nav-icon" aria-hidden="true">✉</span>{{ config["LABELS"]["contact_title"] }}</a>
+      <a class="nav-brand" href="{{ url_for('home') }}" aria-current="page"><span class="nav-brand-mark" aria-hidden="true">M</span><span>{{ config["LABELS"]["home_title"] }}</span></a>
+      <div class="nav-links" aria-label="Primary navigation">
+        <a class="nav-link" href="{{ url_for('recipes') }}"><span class="nav-icon" aria-hidden="true">🍴</span>{{ config["PAGE_NAMES"]["recipes"] }}</a>
+        <a class="nav-link" href="{{ url_for('about') }}"><span class="nav-icon" aria-hidden="true">ⓘ</span>{{ config["LABELS"]["about_title"] }}</a>
+        <a class="nav-link" href="{{ url_for('contact') }}"><span class="nav-icon" aria-hidden="true">✉</span>{{ config["LABELS"]["contact_title"] }}</a>
+      </div>
     </nav>
     <main class="main">
       <header class="page-header">

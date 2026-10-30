@@ -24,11 +24,100 @@ app.config["LABELS"] = LABELS
 app.config["PAGE_NAMES"] = PAGE_NAMES
 links = []
 
+RECIPES = [
+    {
+        "name": "Creamy Tomato Pasta",
+        "emoji": "🍝",
+        "time": "25 min",
+        "description": "A cozy weeknight pasta with a silky tomato cream sauce.",
+        "ingredients": ["200g pasta", "1 cup tomato passata", "1/2 cup cream", "2 garlic cloves", "Parmesan"],
+        "instructions": "Cook the pasta. Sauté garlic, add passata and cream, then toss with pasta and Parmesan.",
+    },
+    {
+        "name": "Avocado Toast",
+        "emoji": "🥑",
+        "time": "10 min",
+        "description": "Crispy toast topped with bright, creamy avocado and a poached egg.",
+        "ingredients": ["2 slices sourdough", "1 ripe avocado", "2 eggs", "Lemon juice", "Chili flakes"],
+        "instructions": "Toast the bread and mash avocado with lemon and salt. Top with a poached egg and chili flakes.",
+    },
+    {
+        "name": "Honey Garlic Chicken",
+        "emoji": "🍗",
+        "time": "30 min",
+        "description": "Golden chicken thighs glazed with a sweet and savory garlic sauce.",
+        "ingredients": ["4 chicken thighs", "3 garlic cloves", "2 tbsp honey", "2 tbsp soy sauce", "Sesame seeds"],
+        "instructions": "Sear chicken until golden. Simmer with garlic, honey, and soy sauce until cooked through.",
+    },
+    {
+        "name": "Rainbow Grain Bowl",
+        "emoji": "🥗",
+        "time": "20 min",
+        "description": "A colorful, nourishing bowl with roasted vegetables and lemon tahini.",
+        "ingredients": ["1 cup cooked quinoa", "Roasted sweet potato", "Cucumber", "Chickpeas", "Tahini dressing"],
+        "instructions": "Arrange quinoa, vegetables, and chickpeas in a bowl. Drizzle with lemon tahini dressing.",
+    },
+    {
+        "name": "Miso Ramen",
+        "emoji": "🍜",
+        "time": "20 min",
+        "description": "A fast, warming ramen bowl packed with umami flavor.",
+        "ingredients": ["2 ramen portions", "3 cups vegetable broth", "2 tbsp miso", "Mushrooms", "Soft-boiled egg"],
+        "instructions": "Simmer broth with mushrooms and miso. Cook noodles separately, then combine and top with egg.",
+    },
+    {
+        "name": "Berry Yogurt Parfait",
+        "emoji": "🫐",
+        "time": "5 min",
+        "description": "A bright breakfast layered with creamy yogurt, fruit, and crunchy granola.",
+        "ingredients": ["1 cup Greek yogurt", "1/2 cup berries", "1/4 cup granola", "1 tsp honey", "Mint"],
+        "instructions": "Layer yogurt, berries, and granola in a glass. Finish with honey and fresh mint.",
+    },
+    {
+        "name": "Crispy Fish Tacos",
+        "emoji": "🌮",
+        "time": "35 min",
+        "description": "Crunchy fish tacos finished with lime slaw and a cool crema.",
+        "ingredients": ["400g white fish", "8 tortillas", "Cabbage slaw", "Lime", "Sour cream"],
+        "instructions": "Season and pan-fry the fish until crisp. Fill warm tortillas with fish, slaw, lime, and crema.",
+    },
+    {
+        "name": "Mushroom Risotto",
+        "emoji": "🍄",
+        "time": "40 min",
+        "description": "Creamy Arborio rice with earthy mushrooms and fresh herbs.",
+        "ingredients": ["1 cup Arborio rice", "250g mushrooms", "4 cups stock", "1/2 onion", "Butter and Parmesan"],
+        "instructions": "Sauté onion and rice, then add warm stock one ladle at a time. Fold in mushrooms, butter, and Parmesan.",
+    },
+    {
+        "name": "Green Goddess Salad",
+        "emoji": "🥬",
+        "time": "15 min",
+        "description": "A crisp chopped salad with herbs and a creamy green dressing.",
+        "ingredients": ["Romaine lettuce", "Cucumber", "Avocado", "Fresh herbs", "Lemon yogurt dressing"],
+        "instructions": "Chop the vegetables and herbs. Toss with avocado and lemon yogurt dressing just before serving.",
+    },
+    {
+        "name": "Chocolate Chip Cookies",
+        "emoji": "🍪",
+        "time": "25 min",
+        "description": "Soft-centered cookies with crisp edges and plenty of chocolate chips.",
+        "ingredients": ["115g butter", "1/2 cup brown sugar", "1 egg", "1 cup flour", "Chocolate chips"],
+        "instructions": "Cream butter and sugar, mix in egg and flour, then fold in chips. Bake scoops at 180°C for 10–12 minutes.",
+    },
+]
+
 
 @app.route("/")
 def home():
     sorted_links = sorted(links, key=lambda link: link["name"].lower())
     return render_template("index.html", links=sorted_links)
+
+
+@app.route("/recipes")
+def recipes():
+    """Display the collection of quick food recipes."""
+    return render_template("with-skills/recipes.html", recipes=RECIPES)
 
 
 @app.get("/health")

@@ -8,8 +8,12 @@
   </head>
   <body>
     <nav class="nav">
-      <a class="nav-link" href="{{ url_for('home') }}"><span class="nav-icon" aria-hidden="true">⌂</span>{{ config["LABELS"]["home_title"] }}</a>
-      <a class="nav-link" href="{{ url_for('contact') }}"><span class="nav-icon" aria-hidden="true">✉</span>{{ config["LABELS"]["contact_title"] }}</a>
+      <a class="nav-brand" href="{{ url_for('home') }}"><span class="nav-brand-mark" aria-hidden="true">M</span><span>{{ config["LABELS"]["home_title"] }}</span></a>
+      <div class="nav-links" aria-label="Primary navigation">
+        <a class="nav-link" href="{{ url_for('recipes') }}"><span class="nav-icon" aria-hidden="true">🍴</span>{{ config["PAGE_NAMES"]["recipes"] }}</a>
+        <a class="nav-link nav-link--active" href="{{ url_for('about') }}" aria-current="page"><span class="nav-icon" aria-hidden="true">ⓘ</span>{{ config["LABELS"]["about_title"] }}</a>
+        <a class="nav-link" href="{{ url_for('contact') }}"><span class="nav-icon" aria-hidden="true">✉</span>{{ config["LABELS"]["contact_title"] }}</a>
+      </div>
     </nav>
     <main class="main">
       <section class="about-card">

@@ -16,6 +16,7 @@
 - Show a warning and visual indicator when link metadata cannot be retrieved.
 - View project information at `/about`.
 - View contact information and an email address at `/contact`.
+- Browse 10 quick food recipes at `/recipes`.
 - Render custom styled pages for 404 and 500 errors.
 
 ### Routes
@@ -27,6 +28,7 @@
 - `POST /delete` — Delete a link.
 - `GET /about` — Display information about the project.
 - `GET /contact` — Display a short contact message and email address.
+- `GET /recipes` — Display 10 recipes with ingredients, timing, and instructions.
 
 ## Setup
 
