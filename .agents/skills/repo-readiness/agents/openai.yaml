@@ -1,0 +1,4 @@
+interface:
+  display_name: "Repo Readiness"
+  short_description: "Score repo readiness and guide improvements"
+  default_prompt: "Use $repo-readiness to evaluate this repository's readiness for AI-assisted development."

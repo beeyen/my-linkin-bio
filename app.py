@@ -1,6 +1,7 @@
 from datetime import datetime
 import json
 import logging
+import os
 from pathlib import Path
 
 import requests
@@ -19,7 +20,8 @@ LABELS = configuration["LABELS"]
 PAGE_NAMES = configuration["PAGE_NAMES"]
 
 app = Flask(__name__, static_folder="statics")
-app.config["SECRET_KEY"] = "dev-secret-key"
+# Use the documented environment secret in deployed environments, with a local-only fallback.
+app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY", "dev-secret-key")
 app.config["LABELS"] = LABELS
 app.config["PAGE_NAMES"] = PAGE_NAMES
 links = []

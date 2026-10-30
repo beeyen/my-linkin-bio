@@ -45,13 +45,24 @@
    pip install -r requirements.txt
    ```
 
-3. Start the development server:
+3. Create the local environment file and replace the placeholder secret:
 
    ```bash
+   cp .env.example .env
+   ```
+
+   `SECRET_KEY` is required for secure Flask sessions and flash messages. The app uses a development fallback when it is not set, but deployed environments should always provide a real secret.
+
+4. Export the environment variables and start the development server:
+
+   ```bash
+   set -a
+   source .env
+   set +a
    python3 app.py
    ```
 
-4. Open [http://127.0.0.1:5000](http://127.0.0.1:5000) in a browser.
+5. Open [http://127.0.0.1:5000](http://127.0.0.1:5000) in a browser.
 
 ## Dependencies
 
