@@ -4,6 +4,8 @@
 
 `my-linkin-bio` is a Flask application for managing and displaying a personal collection of links as styled link cards. Link metadata is fetched from each URL when a link is added or edited.
 
+Application routes are organized in the `main` Flask Blueprint and registered by the application factory in `app.py`.
+
 ## Features
 
 - View links sorted alphabetically by name at `/`.

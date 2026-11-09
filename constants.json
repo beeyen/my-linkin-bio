@@ -1,4 +1,153 @@
 {
+  "RECIPES": [
+    {
+      "name": "Creamy Tomato Pasta",
+      "id": 1,
+      "emoji": "🍝",
+      "time": "25 min",
+      "prep_minutes": 25,
+      "protein": "Vegetarian",
+      "description": "A cozy weeknight pasta with a silky tomato cream sauce.",
+      "ingredients": ["200g pasta", "1 cup tomato passata", "1/2 cup cream", "2 garlic cloves", "Parmesan"],
+      "instructions": "Cook the pasta. Sauté garlic, add passata and cream, then toss with pasta and Parmesan."
+    },
+    {
+      "name": "Avocado Toast",
+      "id": 2,
+      "emoji": "🥑",
+      "time": "10 min",
+      "prep_minutes": 10,
+      "protein": "Vegetarian",
+      "description": "Crispy toast topped with bright, creamy avocado and a poached egg.",
+      "ingredients": ["2 slices sourdough", "1 ripe avocado", "2 eggs", "Lemon juice", "Chili flakes"],
+      "instructions": "Toast the bread and mash avocado with lemon and salt. Top with a poached egg and chili flakes."
+    },
+    {
+      "name": "Honey Garlic Chicken",
+      "id": 3,
+      "emoji": "🍗",
+      "time": "30 min",
+      "prep_minutes": 30,
+      "protein": "Chicken",
+      "description": "Golden chicken thighs glazed with a sweet and savory garlic sauce.",
+      "ingredients": ["4 chicken thighs", "3 garlic cloves", "2 tbsp honey", "2 tbsp soy sauce", "Sesame seeds"],
+      "instructions": "Sear chicken until golden. Simmer with garlic, honey, and soy sauce until cooked through."
+    },
+    {
+      "name": "Rainbow Grain Bowl",
+      "id": 4,
+      "emoji": "🥗",
+      "time": "20 min",
+      "prep_minutes": 20,
+      "protein": "Vegetarian",
+      "description": "A colorful, nourishing bowl with roasted vegetables and lemon tahini.",
+      "ingredients": ["1 cup cooked quinoa", "Roasted sweet potato", "Cucumber", "Chickpeas", "Tahini dressing"],
+      "instructions": "Arrange quinoa, vegetables, and chickpeas in a bowl. Drizzle with lemon tahini dressing."
+    },
+    {
+      "name": "Miso Ramen",
+      "id": 5,
+      "emoji": "🍜",
+      "time": "20 min",
+      "prep_minutes": 20,
+      "protein": "Vegetarian",
+      "description": "A fast, warming ramen bowl packed with umami flavor.",
+      "ingredients": ["2 ramen portions", "3 cups vegetable broth", "2 tbsp miso", "Mushrooms", "Soft-boiled egg"],
+      "instructions": "Simmer broth with mushrooms and miso. Cook noodles separately, then combine and top with egg."
+    },
+    {
+      "name": "Berry Yogurt Parfait",
+      "id": 6,
+      "emoji": "🫐",
+      "time": "5 min",
+      "prep_minutes": 5,
+      "protein": "Vegetarian",
+      "description": "A bright breakfast layered with creamy yogurt, fruit, and crunchy granola.",
+      "ingredients": ["1 cup Greek yogurt", "1/2 cup berries", "1/4 cup granola", "1 tsp honey", "Mint"],
+      "instructions": "Layer yogurt, berries, and granola in a glass. Finish with honey and fresh mint."
+    },
+    {
+      "name": "Crispy Fish Tacos",
+      "id": 7,
+      "emoji": "🌮",
+      "time": "35 min",
+      "prep_minutes": 35,
+      "protein": "Fish",
+      "description": "Crunchy fish tacos finished with lime slaw and a cool crema.",
+      "ingredients": ["400g white fish", "8 tortillas", "Cabbage slaw", "Lime", "Sour cream"],
+      "instructions": "Season and pan-fry the fish until crisp. Fill warm tortillas with fish, slaw, lime, and crema."
+    },
+    {
+      "name": "Mushroom Risotto",
+      "id": 8,
+      "emoji": "🍄",
+      "time": "40 min",
+      "prep_minutes": 40,
+      "protein": "Vegetarian",
+      "description": "Creamy Arborio rice with earthy mushrooms and fresh herbs.",
+      "ingredients": ["1 cup Arborio rice", "250g mushrooms", "4 cups stock", "1/2 onion", "Butter and Parmesan"],
+      "instructions": "Sauté onion and rice, then add warm stock one ladle at a time. Fold in mushrooms, butter, and Parmesan."
+    },
+    {
+      "name": "Green Goddess Salad",
+      "id": 9,
+      "emoji": "🥬",
+      "time": "15 min",
+      "prep_minutes": 15,
+      "protein": "Vegetarian",
+      "description": "A crisp chopped salad with herbs and a creamy green dressing.",
+      "ingredients": ["Romaine lettuce", "Cucumber", "Avocado", "Fresh herbs", "Lemon yogurt dressing"],
+      "instructions": "Chop the vegetables and herbs. Toss with avocado and lemon yogurt dressing just before serving."
+    },
+    {
+      "name": "Chocolate Chip Cookies",
+      "id": 10,
+      "emoji": "🍪",
+      "time": "25 min",
+      "prep_minutes": 25,
+      "protein": "Vegetarian",
+      "description": "Soft-centered cookies with crisp edges and plenty of chocolate chips.",
+      "ingredients": ["115g butter", "1/2 cup brown sugar", "1 egg", "1 cup flour", "Chocolate chips"],
+      "instructions": "Cream butter and sugar, mix in egg and flour, then fold in chips. Bake scoops at 180°C for 10–12 minutes."
+    }
+  ],
+  "RECIPE_FILTERS": {
+    "time": [
+      {"value": "all", "label": "Any time"},
+      {"value": "short", "label": "15 minutes or less", "max_minutes": 15},
+      {"value": "medium", "label": "16–30 minutes", "min_minutes": 16, "max_minutes": 30},
+      {"value": "long", "label": "31 minutes or more", "min_minutes": 31}
+    ],
+    "protein": [
+      {"value": "all", "label": "Any protein"},
+      {"value": "Chicken", "label": "Chicken"},
+      {"value": "Fish", "label": "Fish"},
+      {"value": "Vegetarian", "label": "Vegetarian"}
+    ]
+  },
+  "RECIPE_LABELS": {
+    "eyebrow": "A little something delicious",
+    "title": "Favorite Recipes",
+    "subtitle": "Simple, comforting meals for every kind of craving.",
+    "search_placeholder": "search by ingredient",
+    "search_aria_label": "Search by ingredient",
+    "find_button": "Find recipe",
+    "filters_aria_label": "Filter recipes",
+    "prep_time_label": "Preparation time",
+    "protein_label": "Protein type",
+    "recipe_results_aria_label": "10 food recipes",
+    "ingredients_heading": "Ingredients",
+    "instructions_label": "How to make it:",
+    "copy_recipe": "Copy recipe",
+    "favorite_recipe": "Favorite recipe",
+    "remove_favorite": "Remove favorite recipe",
+    "recipe_copied": "Recipe copied.",
+    "copy_failed": "Copy failed. Please select the recipe text manually.",
+    "empty_search": "Enter an ingredient to search.",
+    "no_recipe_found": "No recipe found for “{query}”.",
+    "recipes_shown_singular": " recipe shown.",
+    "recipes_shown_plural": " recipes shown."
+  },
   "PAGE_NAMES": {
     "home": "My Links",
     "recipes": "Recipes",

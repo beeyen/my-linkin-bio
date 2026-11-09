@@ -8,41 +8,81 @@
   </head>
   <body>
     <nav class="nav">
-      <a class="nav-brand" href="{{ url_for('home') }}"><span class="nav-brand-mark" aria-hidden="true">M</span><span>{{ config["LABELS"]["home_title"] }}</span></a>
+      <a class="nav-brand" href="{{ url_for('main.home') }}"><span class="nav-brand-mark" aria-hidden="true">M</span><span>{{ config["LABELS"]["home_title"] }}</span></a>
       <div class="nav-links" aria-label="Primary navigation">
-        <a class="nav-link nav-link--active" href="{{ url_for('recipes') }}" aria-current="page"><span class="nav-icon" aria-hidden="true">🍴</span>{{ config["PAGE_NAMES"]["recipes"] }}</a>
-        <a class="nav-link" href="{{ url_for('about') }}"><span class="nav-icon" aria-hidden="true">ⓘ</span>{{ config["LABELS"]["about_title"] }}</a>
-        <a class="nav-link" href="{{ url_for('contact') }}"><span class="nav-icon" aria-hidden="true">✉</span>{{ config["LABELS"]["contact_title"] }}</a>
+        <a class="nav-link nav-link--active" href="{{ url_for('main.recipes') }}" aria-current="page"><span class="nav-icon" aria-hidden="true">🍴</span>{{ config["PAGE_NAMES"]["recipes"] }}</a>
+        <a class="nav-link" href="{{ url_for('main.about') }}"><span class="nav-icon" aria-hidden="true">ⓘ</span>{{ config["LABELS"]["about_title"] }}</a>
+        <a class="nav-link" href="{{ url_for('main.contact') }}"><span class="nav-icon" aria-hidden="true">✉</span>{{ config["LABELS"]["contact_title"] }}</a>
       </div>
     </nav>
 
     <main class="main recipes-main">
       <header class="page-header recipes-header">
         <div class="avatar" aria-hidden="true">🍴</div>
-        <p class="eyebrow">A little something delicious</p>
-        <h1>Favorite Recipes</h1>
-        <p class="subtitle">Simple, comforting meals for every kind of craving.</p>
+        <p class="eyebrow">{{ recipe_labels["eyebrow"] }}</p>
+        <h1>{{ recipe_labels["title"] }}</h1>
+        <p class="subtitle">{{ recipe_labels["subtitle"] }}</p>
       </header>
 
-      <section class="recipe-grid" aria-label="10 food recipes">
-        {% for recipe in recipes %}
-          <article class="recipe-card">
-            <div class="recipe-card-top">
-              <span class="recipe-emoji" aria-hidden="true">{{ recipe.emoji }}</span>
-              <span class="recipe-time">⏱ {{ recipe.time }}</span>
-            </div>
-            <h2>{{ recipe.name }}</h2>
-            <p class="recipe-description">{{ recipe.description }}</p>
-            <h3>Ingredients</h3>
-            <ul class="ingredient-list">
-              {% for ingredient in recipe.ingredients %}
-                <li>{{ ingredient }}</li>
+      <div class="recipe-toolbar">
+        <div class="recipe-filters" aria-label="{{ recipe_labels["filters_aria_label"] }}">
+          <div class="recipe-filter-field">
+            <label for="prep-time-filter">{{ recipe_labels["prep_time_label"] }}</label>
+            <select id="prep-time-filter">
+              {% for option in recipe_filters["time"] %}
+                <option value="{{ option["value"] }}"{% if option.get("min_minutes") is not none %} data-min-minutes="{{ option["min_minutes"] }}"{% endif %}{% if option.get("max_minutes") is not none %} data-max-minutes="{{ option["max_minutes"] }}"{% endif %}>{{ option["label"] }}</option>
               {% endfor %}
-            </ul>
-            <p class="recipe-instructions"><strong>How to make it:</strong> {{ recipe.instructions }}</p>
+            </select>
+          </div>
+          <div class="recipe-filter-field">
+            <label for="protein-filter">{{ recipe_labels["protein_label"] }}</label>
+            <select id="protein-filter">
+              {% for option in recipe_filters["protein"] %}
+                <option value="{{ option["value"] }}">{{ option["label"] }}</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+
+        <form class="recipe-search" role="search">
+          <div class="recipe-search-controls">
+            <input id="recipe-search-input" name="ingredient" type="search" placeholder="{{ recipe_labels["search_placeholder"] }}" aria-label="{{ recipe_labels["search_aria_label"] }}" autocomplete="off" />
+            <button class="recipe-search-button" type="submit">{{ recipe_labels["find_button"] }}</button>
+          </div>
+        </form>
+      </div>
+
+      <p class="recipe-count" role="status" aria-live="polite"></p>
+      <p class="recipe-results-status" role="status" aria-live="polite"></p>
+      <section id="recipe-list" class="recipe-grid" aria-label="{{ recipe_labels["recipe_results_aria_label"] }}" data-recipes="{{ recipes | tojson | forceescape }}" data-recipe-labels="{{ recipe_labels | tojson | forceescape }}">
+        {% for recipe in recipes %}
+          <article class="recipe-card" data-recipe-index="{{ loop.index0 }}" data-recipe-id="{{ recipe.id }}" tabindex="-1">
+            <details class="recipe-accordion">
+              <summary class="recipe-summary">
+                <span class="recipe-emoji" aria-hidden="true">{{ recipe.emoji }}</span>
+                <span class="recipe-title">{{ recipe.name }}</span>
+                <span class="recipe-time">⏱ {{ recipe.time }}</span>
+                <button class="favorite-button" type="button" data-recipe-id="{{ recipe.id }}" aria-label="{{ recipe_labels["favorite_recipe"] }}" aria-pressed="false" title="{{ recipe_labels["favorite_recipe"] }}">🤍</button>
+              </summary>
+              <div class="recipe-content">
+                <p class="recipe-description">{{ recipe.description }}</p>
+                <h3>{{ recipe_labels["ingredients_heading"] }}</h3>
+                <ul class="ingredient-list">
+                  {% for ingredient in recipe.ingredients %}
+                    <li>{{ ingredient }}</li>
+                  {% endfor %}
+                </ul>
+                <p class="recipe-instructions"><strong>{{ recipe_labels["instructions_label"] }}</strong> {{ recipe.instructions }}</p>
+                <button class="copy-recipe-button" type="button">
+                  <span aria-hidden="true">⧉</span> {{ recipe_labels["copy_recipe"] }}
+                </button>
+                <p class="copy-status" role="status" aria-live="polite"></p>
+              </div>
+            </details>
           </article>
         {% endfor %}
       </section>
     </main>
+    <script src="{{ url_for('static', filename='utils.js') }}" defer></script>
   </body>
 </html>
